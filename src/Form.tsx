@@ -11,9 +11,13 @@ interface FormData{
     isUrgent: boolean;
 }
 
+interface SendData{
+    sendData: (Data: FormData) => void;
+}
 
 
-const Form = () => {
+
+const Form = ({sendData}:SendData) => {
 
     const [formData, setFormData] = useState<FormData>({
         name:"", category:"", creativity:"", credibility:"",
@@ -21,14 +25,13 @@ const Form = () => {
     })
 
     function handleChage (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>){
-        const {name, value, type,checked} = event.target as HTMLInputElement
-        setFormData(prevState => ({...prevState, [name]: type ==="checkbox" ? checked : value}))
+        const {name, value, type,checked} = event.target as HTMLInputElement;
+        setFormData(prevState => ({...prevState, [name]: type ==="checkbox" ? checked : value}));
 
     }
 
     function handleSubmit(e: React.FormEvent) {
-        e.preventDefault()
-        console.log(formData)
+        e.preventDefault();
     }
 
     return(
@@ -89,7 +92,7 @@ const Form = () => {
                        onChange={handleChage}/>
             </label>
 
-            <button type="submit" >Stwórz wymówkę</button>
+            <button type="submit" onClick={()=> sendData(formData)}>Stwórz wymówkę</button>
 
         </form>
 
