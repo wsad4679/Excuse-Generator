@@ -9,14 +9,13 @@ function App() {
         setData(data)
     }
 
-    const [data, setData] = useState<object>();
+    const [data, setData] = useState<object>({});
 
-    console.log(data)
 
   return (
     <>
         <Form sendData={getData}/>
-        <Excuse/>
+        <Excuse acceptData={data}/>
     </>
   )
 }

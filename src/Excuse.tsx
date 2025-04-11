@@ -1,10 +1,14 @@
 
+interface AcceptData{
+    acceptData:object;
+}
 
-const Excuse = () => {
+const Excuse = ({acceptData}:AcceptData) => {
 
+    console.log(acceptData)
 
     return(
-        <p>dziala</p>
+        <></>
     )
 
 }
