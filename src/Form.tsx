@@ -1,34 +1,96 @@
+import {useState} from "react";
+import * as React from "react";
 
+interface FormData{
+    name: string;
+    date: string;
+    category: string;
+    credibility: string;
+    creativity: string;
+    details: string;
+    isUrgent: boolean;
+}
 
 
 
 const Form = () => {
 
+    const [formData, setFormData] = useState<FormData>({
+        name:"", category:"", creativity:"", credibility:"",
+        details:"", date:"", isUrgent: false
+    })
+
+    function handleChage (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>){
+        const {name, value, type,checked} = event.target as HTMLInputElement
+        setFormData(prevState => ({...prevState, [name]: type ==="checkbox" ? checked : value}))
+
+    }
+
+    function handleSubmit(e: React.FormEvent) {
+        e.preventDefault()
+        console.log(formData)
+    }
 
     return(
 
-        <form>
+        <form onSubmit={handleSubmit}>
             <h3>Generator wymówek</h3>
 
-            <label> Imie: <input type="text" value="" /*oncChange = {event => useStateSetText(event.target.value})*/ />
+            <label> Imie:
+                <input type="text" value={formData.name}
+                       onChange = {handleChage} name="name"/>
             </label>
+
+            <label>Data:
+                <input type="date" value={formData.date}
+                       onChange={handleChage} name="date"/>
+            </label>
+
             <br/>
-            <select>
-                <option>spóźnienie</option>
-                <option>nieobecność</option>
-                <option>brak zadania</option>
-                <option>nieodesłanie repo</option>
+
+            <select value={formData.category} name="category" onChange={handleChage}>
+                <option value="spóźnienie">spóźnienie</option>
+                <option value="nieobecność">nieobecność</option>
+                <option value="brak zadania">brak zadania</option>
+                <option value="nieodesłanie repo">nieodesłanie repo</option>
             </select>
+
             <br/>
-            <label>Data: <input type="date"/> </label>
+
+            <label>Poziom wiarygodności: 1
+                <input type="range" min="1" max="5" name="credibility" value = {formData.credibility}
+                       onChange={handleChage}/>5
+            </label>
+
             <br/>
-            <label>Poziom wiarygodności: 1<input type="range" min="1" max="5"/>5 </label>
+
+            <select name="creativity" value={formData.creativity} onChange={handleChage}>
+
+                <option value="1">Bez wymysłów</option>
+                <option value="2">Minimalnie koloryzowane</option>
+                <option value="3">Kolory jak na mapie z historii</option>
+                <option value="4">(nie) Biała ściana małego dziecka</option>
+                <option value="5">Takiego obrazu da Vinci by się nie powstydził</option>
+
+            </select>
+
             <br/>
-            <label>Poziom kreatywności: 1<input type="range" min="1" max="5"/>5 </label>
+
+            <label>Dodatkowe szczegóły:
+                <textarea name="details" value={formData.details}
+                                                  onChange={handleChage}/>
+            </label>
+
             <br/>
-            <label>Dodatkowe szczegóły: <textarea/></label>
-            <br/>
-            <label>Pilność wymówki: <input type="checkbox"/> </label>
+
+
+            <label>Pilność wymówki:
+                <input type="checkbox" name="isUrgent" checked={formData.isUrgent}
+                       onChange={handleChage}/>
+            </label>
+
+            <button type="submit" >Stwórz wymówkę</button>
+
         </form>
 
 
