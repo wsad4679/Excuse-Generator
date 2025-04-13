@@ -53,17 +53,16 @@ const Form = ({sendData}:SendData) => {
 
             <select value={formData.category} name="category" onChange={handleChage}>
                 <option value="spóźnienie">spóźnienie</option>
-                <option value="nieobecność">nieobecność</option>
+                <option value="nieobecność" selected>nieobecność</option>
                 <option value="brak_zadania">brak zadania</option>
                 <option value="nieodesłanie_repo">nieodesłanie repo</option>
             </select>
 
             <br/>
 
-            <label>Poziom wiarygodności: 1
+            Poziom wiarygodności:
                 <input type="range" min="1" max="5" name="credibility" value = {formData.credibility}
-                       onChange={handleChage}/>5
-            </label>
+                       onChange={handleChage}/>
 
             <br/>
 

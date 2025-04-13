@@ -15,8 +15,16 @@ function App() {
 
   return (
     <>
-        <Form sendData={getData}/>
-        <Excuse acceptData={data}/>
+        <div className="container">
+            <div className="form-panel">
+                <Form sendData={getData} />
+            </div>
+
+            <div className="excuses-panel">
+                <Excuse acceptData={data} />
+            </div>
+
+        </div>
     </>
   )
 
