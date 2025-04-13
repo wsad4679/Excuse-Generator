@@ -12,7 +12,7 @@ interface FormData{
 }
 
 interface SendData{
-    sendData: (Data: FormData) => void;
+    sendData: (data: FormData) => void;
 }
 
 

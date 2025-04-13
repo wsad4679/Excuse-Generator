@@ -5,11 +5,11 @@ import {useState} from "react";
 
 function App() {
 
-    function getData (data: object):void {
-        setData(data)
+    function getData (formData: object):void {
+        setData(prev => [...prev, formData]);
     }
 
-    const [data, setData] = useState<object>({});
+    const [data, setData] = useState<object[]>([]);
 
 
   return (
