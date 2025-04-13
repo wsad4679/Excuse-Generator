@@ -54,8 +54,8 @@ const Form = ({sendData}:SendData) => {
             <select value={formData.category} name="category" onChange={handleChage}>
                 <option value="spóźnienie">spóźnienie</option>
                 <option value="nieobecność">nieobecność</option>
-                <option value="brak zadania">brak zadania</option>
-                <option value="nieodesłanie repo">nieodesłanie repo</option>
+                <option value="brak_zadania">brak zadania</option>
+                <option value="nieodesłanie_repo">nieodesłanie repo</option>
             </select>
 
             <br/>

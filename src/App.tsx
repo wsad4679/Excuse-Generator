@@ -12,12 +12,14 @@ function App() {
     const [data, setData] = useState<object[]>([]);
 
 
+
   return (
     <>
         <Form sendData={getData}/>
         <Excuse acceptData={data}/>
     </>
   )
+
 }
 
 export default App
