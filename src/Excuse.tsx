@@ -140,7 +140,11 @@ interface UserExcuse {
     isUrgent: boolean;
 }
 const Excuse = ({ acceptData }: AcceptData) => {
-    const [userExcusesList, setUserExcusesList] = useState<UserExcuse[]>([]);
+    const [userExcusesList, setUserExcusesList] = useState<UserExcuse[]>(()  =>{
+        const savedExcuses = localStorage.getItem('userExcuses');
+        return savedExcuses ? JSON.parse(savedExcuses) : [];
+    });
+
 
     useEffect(() => {
         if (acceptData.length > 0) {
@@ -168,15 +172,35 @@ const Excuse = ({ acceptData }: AcceptData) => {
                     isUrgent: lastExcuse.isUrgent,
                 },
             ]);
+
         }
+
     }, [acceptData]);
+
+    localStorage.setItem('userExcuses', JSON.stringify(userExcusesList));
+
+
+
+    function deleteFromLocalStorage(index: number) {
+        const updatedList = [...userExcusesList];
+        updatedList.splice(index, 1);
+        localStorage.setItem('userExcuses', JSON.stringify(updatedList));
+        setUserExcusesList(updatedList);
+    }
+
+
 
     return (
         <div>
             <h2>Wymówki:</h2>
             {userExcusesList.length === 0 && <p>Brak wymówek</p>}
             {userExcusesList.map((excuse, index) => (
-                <div key={index} style={{ border: "1px solid gray", padding: "10px", margin: "10px" }}>
+                <div key={index} style={{padding: "10px", margin: "10px",
+                border: excuse.isUrgent ? "3px solid red" : "1px solid gray",  borderRadius: "15px"
+                }}
+                >
+                    {excuse.isUrgent ? <h2 style={{color: "rgb(0,188,255)" }}>Pilne!</h2> : null}
+
                     <p>
                         <strong>Imię:</strong> {excuse.name}
                     </p>
@@ -184,11 +208,14 @@ const Excuse = ({ acceptData }: AcceptData) => {
                         <strong>Data:</strong> {excuse.date}
                     </p>
                     <p>
-                        <strong>Szczegóły:</strong> {excuse.content}
+                        <strong>Powód:</strong> <blockquote>{excuse.content}</blockquote>
                     </p>
+
                     <p>
-                        <strong>Pilne:</strong> {excuse.isUrgent ? "Tak" : "Nie"}
+                        <strong>Szczegóły: </strong> <blockquote>{excuse.details}</blockquote>
                     </p>
+
+                    <button onClick={() =>deleteFromLocalStorage(index)}>Usuń z local storage</button>
                 </div>
             ))}
         </div>
