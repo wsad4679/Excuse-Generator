@@ -16,12 +16,12 @@ function App() {
   return (
     <>
         <div className="container">
-            <div className="form-panel">
+            <div className="form">
                 <Form sendData={getData} />
             </div>
 
-            <div className="excuses-panel">
-                <Excuse acceptData={data} />
+            <div className="excuseBlock">
+                <Excuse acceptData = {data} />
             </div>
 
         </div>

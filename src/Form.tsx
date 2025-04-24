@@ -43,6 +43,7 @@ const Form = ({sendData}:SendData) => {
                 <input type="text" value={formData.name}
                        onChange = {handleChage} name="name"/>
             </label>
+            <br/>
 
             <label>Data:
                 <input type="date" value={formData.date}
@@ -61,12 +62,13 @@ const Form = ({sendData}:SendData) => {
 
             <br/>
 
-            Poziom wiarygodności:
+            Poziom wiarygodności: 1
                 <input type="range" min="1" max="5" name="credibility" value = {formData.credibility}
-                       onChange={handleChage}/>
+                       onChange={handleChage}/> 5
 
             <br/>
 
+            Kreatywność:
             <select name="creativity" value={formData.creativity} onChange={handleChage}>
 
                 <option value="1">Bez wymysłów</option>
@@ -91,6 +93,8 @@ const Form = ({sendData}:SendData) => {
                 <input type="checkbox" name="isUrgent" checked={formData.isUrgent}
                        onChange={handleChage}/>
             </label>
+
+            <br/>
 
             <button type="submit" onClick={()=> sendData(formData)}>Stwórz wymówkę</button>
 

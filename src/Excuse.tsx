@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 
+
 const excuses: ExcusesListKeys = {
     spóźnienie: {
         1: [
@@ -203,12 +204,12 @@ const Excuse = ({ acceptData }: AcceptData) => {
 
 
     return (
-        <div>
+        <div className="excuses">
             <h2>Wymówki:</h2>
             {userExcusesList.length === 0 && <p>Brak wymówek</p>}
             {userExcusesList.map((excuse, index) => (
                 <div key={index} style={{padding: "10px", margin: "10px",
-                border: excuse.isUrgent ? "3px solid red" : "1px solid gray",  borderRadius: "15px"
+                border: excuse.isUrgent ? "3px solid red" : "1px solid black",  borderRadius: "15px"
                 }}
                 >
                     {excuse.isUrgent ? <h2 style={{color: "rgb(0,188,255)" }}>Pilne!</h2> : null}
