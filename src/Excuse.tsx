@@ -189,6 +189,18 @@ const Excuse = ({ acceptData }: AcceptData) => {
     }
 
 
+    function editExcuse(index: number) {
+        const newDetails = prompt("Podaj szczegóły jakie chcesz umieścić w wymówce: ")
+        if(newDetails !== null && newDetails.trim() !== "")
+        {
+            const updatedList = [...userExcusesList];
+            updatedList[index].details = newDetails;
+            localStorage.setItem('userExcuses', JSON.stringify(updatedList));
+            setUserExcusesList(updatedList);
+        }
+    }
+
+
 
     return (
         <div>
@@ -216,6 +228,7 @@ const Excuse = ({ acceptData }: AcceptData) => {
                     </p>
 
                     <button onClick={() =>deleteFromLocalStorage(index)}>Usuń z local storage</button>
+                    <button onClick={() =>editExcuse(index)}>Zmień szczegóły</button>
                 </div>
             ))}
         </div>
